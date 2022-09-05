@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 
-from .db import send_author_to_db, get_authors_from_db, send_book_to_db, get_books_from_db, update_book, delete_book
+from .db import send_author_to_db, get_authors_from_db, delete_author_from_db, send_book_to_db, get_books_from_db, update_book, delete_book
 				
 
 
@@ -28,6 +28,13 @@ bp.route("/get_authors", methods=["GET"])
 def get_authors():
 
 	return get_authors_from_db()
+
+
+@bp.route("/delete_author/<identifier>", methods=["GET"])
+def delete_author(identifier):
+
+    delete_author_from_db(identifier)
+    
 
 
 @bp.route("/send", methods=["POST"])

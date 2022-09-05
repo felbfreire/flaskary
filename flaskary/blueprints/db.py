@@ -49,6 +49,16 @@ def get_authors_from_db():
 	drop_conn(conn)
 
 
+def delete_author_from_db(identifier: str, **kw):
+
+    conn = connect_db()
+    cur = conn.cursor()
+
+    cur.execute(f"delete from authors where id = {identifier}")
+
+    drop_conn(conn)
+
+
 def send_book_to_db(title: str, author_id: int):
 
 	conn  = connect_db()
