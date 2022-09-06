@@ -28,25 +28,31 @@ def init_db(conn):
 
 def send_author_to_db(first_name: str, last_name: str):
 
-	conn = connect_db()
-	cur = conn.cursor()
+    conn = connect_db()
+    cur = conn.cursor()
 
-	cur.execute(f"insert into authors (name, lastname) values ('{first_name}', '{last_name}');")
+    try:
+        cur.execute(f"insert into authors (name, lastname) values ('{first_name}', '{last_name}');")
+    except psycopg2.Error as e:
+        print(e.diag.severity)
 
-	drop_conn(conn)
+    drop_conn(conn)
 
 
 def get_authors_from_db():
 
-	conn = connect_db()
-	cur = conn.cursor()
+    conn = connect_db()
+    cur = conn.cursor()
 
-	cur.execute("select * from authors;")
+    try:
+        cur.execute("select * from authors;")
+    except psycopg2.Error as e:
+        print(e.diag.severety)
 
-	authors = cur.fetchall()
+    authors = cur.fetchall()
 
-	return authors
-	drop_conn(conn)
+    return authors
+    drop_conn(conn)
 
 
 def delete_author_from_db(identifier: str, **kw):
@@ -54,50 +60,67 @@ def delete_author_from_db(identifier: str, **kw):
     conn = connect_db()
     cur = conn.cursor()
 
-    cur.execute(f"delete from authors where id = {identifier}")
+    try:
+        cur.execute(f"delete from authors where id = {identifier}")
+    except psycopg.Error as e:
+        print(e.diag.severity)
 
     drop_conn(conn)
 
 
 def send_book_to_db(title: str, author_id: int):
 
-	conn  = connect_db()
-	cur = conn.cursor()
+    conn  = connect_db()
+    cur = conn.cursor()
 
-	cur.execute(f"insert into books (title, author_id) values ('{title}', '{author_id}');")
+    try:
+        cur.execute(f"insert into books (title, author_id) values ('{title}', '{author_id}');")
+    except psycopg2.Error as e:
+        print(e.diag.severity)
 
-	drop_conn(conn)
+    drop_conn(conn)
 
 
 def get_books_from_db(*args, **kwargs):
-	conn = connect_db()
-	cur = conn.cursor()
 
-	cur.execute("select * from books;")
-	names = cur.fetchall()
+    conn = connect_db()
+    cur = conn.cursor()
 
-	return names
-	drop_conn(conn)
+    try:
+        cur.execute("select * from books;")
+    except psycopg2.Error as e:
+        print(e.diag.severity)
+
+    names = cur.fetchall()
+
+    return names
+    drop_conn(conn)
 
 
 def update_book(identifier: str, **kw):
 
-	conn = connect_db()
-	cur = conn.cursor()
+    conn = connect_db()
+    cur = conn.cursor()
 
-	cur.execute(f"update books set (title, author_id) = {kw['title'], kw['author_id']} where id = {identifier}")
+    try:
+        cur.execute(f"update books set (title, author_id) = {kw['title'], kw['author_id']} where id = {identifier}")
+    except psycopg2.Error as e:
+        print(e.diag.severity)
 
-	drop_conn(conn)
+    drop_conn(conn)
 
 
 def delete_book(identifier: int, *args, **kwargs):
 
-	conn = connect_db()
-	cur = conn.cursor()
+    conn = connect_db()
+    cur = conn.cursor()
 
-	cur.execute(f"delete from books where id = {identifier}")
+    try:
+        cur.execute(f"delete from books where id = {identifier}")
+    except psycopg2.Error as e:
+        print(e.diag.severity)
 
-	drop_conn(conn)
+    drop_conn(conn)
 
 
 @click.command("init_db")
