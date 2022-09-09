@@ -36,7 +36,7 @@ def send_author_to_db(first_name: str, last_name: str):
     cur = cursor()
 
     try:
-        cur.execute(f"insert into authors (name, lastname) values ('{first_name}', '{last_name}');")
+        cur.execute((f"insert into authors (name, lastname) values ('{first_name}', '{last_name}');"))
     except psycopg2.Error as e:
         print(e.diag.severity)
 
@@ -48,7 +48,7 @@ def get_authors_from_db():
     cur = cursor()
 
     try:
-        cur.execute("select * from authors;")
+        cur.execute(("select * from authors;"))
     except psycopg2.Error as e:
         print(e.diag.severety)
 
@@ -63,7 +63,7 @@ def delete_author_from_db(identifier: str, **kw):
     cur = cursor()
 
     try:
-        cur.execute(f"delete from authors where id = {identifier}")
+        cur.execute((f"delete from authors where id = {identifier}"))
     except psycopg.Error as e:
         print(e.diag.severity)
 
@@ -75,7 +75,7 @@ def send_book_to_db(title: str, author_id: int):
     cur = cursor()
 
     try:
-        cur.execute(f"insert into books (title, author_id) values ('{title}', '{author_id}');")
+        cur.execute((f"insert into books (title, author_id) values ('{title}', '{author_id}');"))
     except psycopg2.Error as e:
         print(e.diag.severity)
 
@@ -87,7 +87,7 @@ def get_books_from_db(*args, **kwargs):
     cur = cursor()
 
     try:
-        cur.execute("select * from books;")
+        cur.execute(("select * from books;"))
     except psycopg2.Error as e:
         print(e.diag.severity)
 
@@ -102,7 +102,7 @@ def update_book(identifier: str, **kw):
     cur = cursor()
 
     try:
-        cur.execute(f"update books set (title, author_id) = {kw['title'], kw['author_id']} where id = {identifier}")
+        cur.execute((f"update books set (title, author_id) = {kw['title'], kw['author_id']} where id = {identifier}"))
     except psycopg2.Error as e:
         print(e.diag.severity)
 
@@ -114,7 +114,7 @@ def delete_book(identifier: int, *args, **kwargs):
     cur = cursor()
 
     try:
-        cur.execute(f"delete from books where id = {identifier}")
+        cur.execute((f"delete from books where id = {identifier}"))
     except psycopg2.Error as e:
         print(e.diag.severity)
 
