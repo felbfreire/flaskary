@@ -10,15 +10,12 @@ os.system("flask init_db")
 
 class TestDb:
 
-    def test_insert_author_to_db(self):
+
+    def test_insert_authorr(self):
 
         name = "Fred"
         last_name = "Nit"
-
         db.send_author_to_db(name, last_name)
-
-
-    def test_if_db_has_new_author(self):
 
         authors =  db.get_authors_from_db()
 
@@ -38,30 +35,26 @@ class TestDb:
         assert books == []
 
 
-    def test_send_to_db(self):
+    def test_get_from_db(self):
         title = "Lord of the rings - The two towers"
         author_id = 1
-
         db.send_book_to_db(title, author_id)
 
-
-    def test_get_from_db(self):
         books = db.get_books_from_db()
 
         assert books == [(1, "Lord of the rings - The two towers", 1)] 
 
 
     def test_update_book(self):
-
         identifier = 1
         title = "narn i chin hurin"
         author_id = "1" 
 
-        db.update_book(identifier,
-            title=title,
-            author_id=author_id)
-
-    def test_if_update_book__actualy_updated_id(self):
+        db.update_book(
+                identifier,
+                title=title,
+                author_id=author_id
+                )
 
         books = db.get_books_from_db()
 
