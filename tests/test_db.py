@@ -33,13 +33,15 @@ class TestDb:
         assert authors == [(1, "John", "Tolkien")]
 
 
-    def test_if_database_names_table_is_empty(self):
+    def test_if_database_books_table_is_empty(self):
+
         books = db.get_books_from_db()
 
         assert books == []
 
 
     def test_get_from_db(self):
+
         title = "Lord of the rings - The two towers"
         author_id = 1
         db.send_book_to_db(title, author_id)
@@ -50,6 +52,7 @@ class TestDb:
 
 
     def test_update_book(self):
+
         identifier = 1
         title = "narn i chin hurin"
         author_id = "1" 
@@ -58,7 +61,7 @@ class TestDb:
                 identifier,
                 title=title,
                 author_id=author_id
-                )
+        )
 
         books = db.get_books_from_db()
 
@@ -70,4 +73,5 @@ class TestDb:
         identifier = 1
 
         db.delete_book(identifier)
+
 
