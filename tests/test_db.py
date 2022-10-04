@@ -74,4 +74,8 @@ class TestDb:
 
         db.delete_book(identifier)
 
+        books = db.get_books_from_db()
+
+        assert books == []
+
 
