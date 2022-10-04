@@ -28,6 +28,10 @@ class TestDb:
 
         db.delete_author_from_db(identifier)
 
+        authors = db.get_authors_from_db()
+
+        assert authors == [(1, "John", "Tolkien")]
+
 
     def test_if_database_names_table_is_empty(self):
         books = db.get_books_from_db()
